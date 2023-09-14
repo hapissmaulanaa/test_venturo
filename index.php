@@ -90,9 +90,6 @@
                 var minumanTotal = Array(12).fill(0);
                 
                 menuCategories.forEach(menu => {
-                    // var row = '<tr><td>' + menu + '</td>';
-                    // var makanan = menuData.find(item=>item.kategori==="makanan")
-                    // var minuman = menuData.find(item=>item.kategori==="minuman")
                     var row = '<tr><td>' + menu +    '</td>';
                     for (var i = 1; i <= 12; i++) {
                         var total = 0;
