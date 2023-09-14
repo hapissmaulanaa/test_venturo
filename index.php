@@ -172,7 +172,7 @@ if (isset($_GET['tahun']) && $_GET['tahun'] != "") {
                                 <tr>
                                     <td class="table-dark" colspan="1"><b>Total Harga</b></td>
                                     <?php
-                                    $totalBulan = array_fill(0, 12, 0); // Inisialisasi array totalBulan
+                                    $totalBulan = array_fill(0, 12, 0); 
                                     foreach ($menu as $key => $value) {
                                         for ($i = 0; $i < 12; $i++) {
                                             $totalBulan[$i] += $value['value'][$i];
