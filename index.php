@@ -55,7 +55,7 @@ if (isset($_GET['tahun']) && $_GET['tahun'] != "") {
             font-size: 11px;
         }
     </style>
-    <title>Tes - Venturo</title>
+    <title>TES - Venturo Camp Tahap 2</title>
 </head>
 
 <body>
@@ -72,16 +72,13 @@ if (isset($_GET['tahun']) && $_GET['tahun'] != "") {
                             <div class="form-group">
                                 <select id="my-select" class="form-control" name="tahun">
                                     <option value="">Pilih Tahun</option>
-                                    <option value="2021" selected="">2021</option>
-                                    <!-- Revisi -->
                                     <?php
-                                    if (isset($_GET['tahun']) && $_GET['tahun'] == '2022') {
-                                        echo '<option value="2022" selected>2022</option>';
-                                    } else {
-                                        echo '<option value="2022">2022</option>';
+                                    $tahunOptions = ['2021', '2022']; // Daftar tahun yang tersedia
+                                    foreach ($tahunOptions as $tahunOption) {
+                                        $selected = (isset($_GET['tahun']) && $_GET['tahun'] == $tahunOption) ? 'selected' : '';
+                                        echo '<option value="' . $tahunOption . '" ' . $selected . '>' . $tahunOption . '</option>';
                                     }
                                     ?>
-                                    <!-- End -->
                                 </select>
                             </div>
                         </div>
@@ -99,98 +96,109 @@ if (isset($_GET['tahun']) && $_GET['tahun'] != "") {
                     </div>
                 </form>
                 <hr>
-                <div class="table-responsive">
-                    <table class="table table-hover table-bordered" style="margin: 0;">
-                        <thead>
-                            <tr class="table-dark">
-                                <th rowspan="2" style="text-align:center;vertical-align: middle;width: 250px;">Menu</th>
-                                <th colspan="12" style="text-align: center;">Periode Pada <?= $_GET['tahun'] ?></th>
-                                <th rowspan="2" style="text-align:center;vertical-align: middle;width:75px">Total</th>
-                            </tr>
-                            <tr class="table-dark">
-                                <th style="text-align: center;width: 75px;">Jan</th>
-                                <th style="text-align: center;width: 75px;">Feb</th>
-                                <th style="text-align: center;width: 75px;">Mar</th>
-                                <th style="text-align: center;width: 75px;">Apr</th>
-                                <th style="text-align: center;width: 75px;">Mei</th>
-                                <th style="text-align: center;width: 75px;">Jun</th>
-                                <th style="text-align: center;width: 75px;">Jul</th>
-                                <th style="text-align: center;width: 75px;">Ags</th>
-                                <th style="text-align: center;width: 75px;">Sep</th>
-                                <th style="text-align: center;width: 75px;">Okt</th>
-                                <th style="text-align: center;width: 75px;">Nov</th>
-                                <th style="text-align: center;width: 75px;">Des</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php if (isset($_GET['tahun']) && $_GET['tahun'] != "") : ?>
-                                <tr>
-                                    <td class="table-secondary" colspan="14"><b>Makanan</b></td>
+                <!-- Kondisi berikut untuk menampilkan tabel hanya jika tahun telah dipilih -->
+                <?php if (isset($_GET['tahun']) && $_GET['tahun'] != "") : ?>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered" style="margin: 0;">
+                            <thead>
+                                <tr class="table-dark">
+                                    <th rowspan="2" style="text-align:center;vertical-align: middle;width: 250px;">Menu</th>
+                                    <th colspan="12" style="text-align: center;">Periode Pada <?= $_GET['tahun'] ?></th>
+                                    <th rowspan="2" style="text-align:center;vertical-align: middle;width:75px">Total</th>
                                 </tr>
-                                <?php
-                                foreach ($menu as $key => $value) :
-                                    if ($value['kategori'] === "makanan") :
-                                ?>
-                                        <tr>
-                                            <td style="text-align: left;"><?= $menu[$key]['menu'] ?></td>
-                                            <?php
-                                            foreach ($value['value'] as $kunci => $nilai) :
-                                            ?>
-                                                <td style="text-align: right;"><?= $nilai != 0 ? $nilai : "" ?></td>
-                                            <?php
-                                            endforeach;
-                                            ?>
-                                            <td style="text-align: right;"><b><?= $value['totalHarga'] ?></b></td>
-                                        </tr>
-                                <?php
-                                    endif;
-                                endforeach;
-                                ?>
-                                <tr>
-                                    <td class="table-secondary" colspan="14"><b>Minuman</b></td>
+                                <tr class="table-dark">
+                                    <th style="text-align: center;width: 75px;">Jan</th>
+                                    <th style="text-align: center;width: 75px;">Feb</th>
+                                    <th style="text-align: center;width: 75px;">Mar</th>
+                                    <th style="text-align: center;width: 75px;">Apr</th>
+                                    <th style="text-align: center;width: 75px;">Mei</th>
+                                    <th style="text-align: center;width: 75px;">Jun</th>
+                                    <th style="text-align: center;width: 75px;">Jul</th>
+                                    <th style="text-align: center;width: 75px;">Ags</th>
+                                    <th style="text-align: center;width: 75px;">Sep</th>
+                                    <th style="text-align: center;width: 75px;">Okt</th>
+                                    <th style="text-align: center;width: 75px;">Nov</th>
+                                    <th style="text-align: center;width: 75px;">Des</th>
                                 </tr>
-                                <?php
-                                foreach ($menu as $key => $value) :
-                                    if ($value['kategori'] === "minuman") :
-                                ?>
-                                        <tr>
-                                            <td style="text-align: left;"><?= $menu[$key]['menu'] ?></td>
-                                            <?php
-                                            foreach ($value['value'] as $kunci => $nilai) :
-                                            ?>
-                                                <td style="text-align: right;"><?= $nilai != 0 ? $nilai : "" ?></td>
-                                            <?php
-                                            endforeach;
-                                            ?>
-                                            <td style="text-align: right;"><b><?= $value['totalHarga'] ?></b></td>
-                                        </tr>
-                                <?php
-                                    endif;
-                                endforeach;
-                                ?>
-                                <tr>
-                                <tr>
-                                    <td class="table-dark" colspan="1"><b>Total Harga</b></td>
+                            </thead>
+                            <tbody>
+                                <?php if (isset($_GET['tahun']) && $_GET['tahun'] != "") : ?>
+                                    <tr>
+                                        <td class="table-secondary" colspan="14"><b>Makanan</b></td>
+                                    </tr>
+                                    <!-- Kode untuk menampilkan data makanan -->
                                     <?php
-                                    $totalBulan = array_fill(0, 12, 0); 
-                                    foreach ($menu as $key => $value) {
-                                        for ($i = 0; $i < 12; $i++) {
-                                            $totalBulan[$i] += $value['value'][$i];
-                                        }
-                                    }
-                                    foreach ($totalBulan as $index => $total) {
-                                        echo '<td class="table-dark" style="text-align: right;"><b>' . ($total != 0 ? $total : '') . '</b></td>';
-                                        if ($index == 11) {
-                                            echo '<td class="table-dark" style="text-align: right;"><b>' . array_sum($totalBulan) . '</b></td>';
-                                        }
-                                    }
+                                    foreach ($menu as $key => $value) :
+                                        if ($value['kategori'] === "makanan") :
                                     ?>
-                                </tr>
-                            <?php else : ?>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
-                </div>
+                                            <tr>
+                                                <td style="text-align: left;"><?= $menu[$key]['menu'] ?></td>
+                                                <!-- Kode untuk menampilkan nilai makanan per bulan -->
+                                                <?php
+                                                foreach ($value['value'] as $kunci => $nilai) :
+                                                    $nilaiFormatted = ($nilai != 0) ? number_format($nilai) : ''; // Format nilai dengan koma ribuan
+                                                ?>
+                                                    <td style="text-align: right;"><?= $nilaiFormatted ?></td>
+                                                <?php
+                                                endforeach;
+                                                $totalHargaFormatted = number_format($value['totalHarga']); // Format total harga dengan koma ribuan
+                                                ?>
+                                                <td style="text-align: right;"><b><?= $totalHargaFormatted ?></b></td>
+                                            </tr>
+                                    <?php
+                                        endif;
+                                    endforeach;
+                                    ?>
+                                    <!-- Kode untuk menampilkan data minuman -->
+                                    <tr>
+                                        <td class="table-secondary" colspan="14"><b>Minuman</b></td>
+                                    </tr>
+                                    <?php
+                                    foreach ($menu as $key => $value) :
+                                        if ($value['kategori'] === "minuman") :
+                                    ?>
+                                            <tr>
+                                                <td style="text-align: left;"><?= $menu[$key]['menu'] ?></td>
+                                                <?php
+                                                foreach ($value['value'] as $kunci => $nilai) :
+                                                    $nilaiFormatted = ($nilai != 0) ? number_format($nilai) : ''; // Format nilai dengan koma ribuan
+                                                ?>
+                                                    <td style="text-align: right;"><?= $nilaiFormatted ?></td>
+                                                <?php
+                                                endforeach;
+                                                $totalHargaFormatted = number_format($value['totalHarga']); // Format total harga dengan koma ribuan
+                                                ?>
+                                                <td style="text-align: right;"><b><?= $totalHargaFormatted ?></b></td>
+                                            </tr>
+                                    <?php
+                                        endif;
+                                    endforeach;
+                                    ?>
+                                    <tr>
+                                    <tr>
+                                        <td class="table-dark" colspan="1"><b>Total Harga</b></td>
+                                        <?php
+                                        $totalBulan = array_fill(0, 12, 0); // Inisialisasi array totalBulan
+                                        foreach ($menu as $key => $value) {
+                                            for ($i = 0; $i < 12; $i++) {
+                                                $totalBulan[$i] += $value['value'][$i];
+                                            }
+                                        }
+                                        foreach ($totalBulan as $index => $total) {
+                                            $totalFormatted = ($total != 0) ? number_format($total) : ''; // Format total dengan koma
+                                            echo '<td class="table-dark" style="text-align: right;"><b>' . $totalFormatted . '</b></td>';
+                                            if ($index == 11) {
+                                                $totalSumFormatted = number_format(array_sum($totalBulan)); // Format total keseluruhan dengan koma
+                                                echo '<td class="table-dark" style="text-align: right;"><b>' . $totalSumFormatted . '</b></td>';
+                                            }
+                                        }
+                                        ?>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
