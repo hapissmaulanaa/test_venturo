@@ -145,7 +145,7 @@ if (isset($_GET['tahun']) && $_GET['tahun'] != "") {
                                 <?php if (isset($_GET['tahun']) && $_GET['tahun'] != "") : ?>
                                     <!-- Kode untuk menampilkan total harga makanan perbulan -->
                                     <tr>
-                                        <td class="table-secondary"><b>Total Harga Makanan</b></td>
+                                        <td class="table-secondary"><b>Makanan</b></td>
                                         <?php
                                         for ($total = 0; $total < count($totalHargaMakanan); $total++) {
                                             $totalFormatted = ($totalHargaMakanan[$total] != 0) ? ' ' . number_format($totalHargaMakanan[$total], 0, ',', '.') : '';
@@ -175,7 +175,7 @@ if (isset($_GET['tahun']) && $_GET['tahun'] != "") {
                                     ?>
                                     <!-- Kode untuk menampilkan total harga minuman perbulan -->
                                     <tr>
-                                        <td class="table-secondary"><b>Total Harga Minuman</b></td>
+                                        <td class="table-secondary"><b>Minuman</b></td>
                                         <?php
                                         for ($total = 0; $total < count($totalHargaMinuman); $total++) {
                                             $totalFormatted = ($totalHargaMinuman[$total] != 0) ? ' ' . number_format($totalHargaMinuman[$total], 0, ',', '.') : '';
